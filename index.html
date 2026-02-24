@@ -1,0 +1,428 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Destinos poco comunes para visitar en 2026">
+    <meta name="keywords" content="Viajes, 2026, destinos alternativos, turismo">
+    <meta name="author" content="Javier López Mulas">
+    <title>Destinos poco comunes para visitar en 2026</title>
+    <link rel="icon" href="imagenes/favicon.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="general.css">
+    <link rel="stylesheet" href="index.css">
+
+    <style>
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 30, 60, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 24px;
+            height: 62px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .nav-logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+            .nav-logo span {
+                color: #4d9fff;
+            }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+            .nav-links li a {
+                display: block;
+                padding: 8px 16px;
+                color: rgba(255,255,255,0.82);
+                text-decoration: none;
+                font-size: 15px;
+                border-radius: 8px;
+                transition: background 0.2s, color 0.2s;
+            }
+
+                .nav-links li a:hover,
+                .nav-links li a.activo-nav {
+                    background: rgba(44,123,229,0.22);
+                    color: #fff;
+                }
+
+                .nav-links li a.btn-nav-cta {
+                    background: linear-gradient(135deg, #2c7be5, #1a5fb4);
+                    color: #fff;
+                    font-weight: 600;
+                    padding: 8px 20px;
+                }
+
+                    .nav-links li a.btn-nav-cta:hover {
+                        background: linear-gradient(135deg, #3d8df5, #2468c4);
+                        transform: translateY(-1px);
+                    }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+            .nav-toggle span {
+                display: block;
+                width: 24px;
+                height: 2px;
+                background: #fff;
+                border-radius: 2px;
+                transition: transform 0.3s, opacity 0.3s;
+            }
+
+            .nav-toggle.abierto span:nth-child(1) {
+                transform: translateY(7px) rotate(45deg);
+            }
+
+            .nav-toggle.abierto span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-toggle.abierto span:nth-child(3) {
+                transform: translateY(-7px) rotate(-45deg);
+            }
+
+        @media (max-width: 700px) {
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 62px;
+                left: 0;
+                right: 0;
+                background: rgba(15, 30, 60, 0.97);
+                flex-direction: column;
+                padding: 14px 20px 20px;
+                gap: 4px;
+                border-top: 1px solid rgba(255,255,255,0.08);
+            }
+
+                .nav-links.abierto {
+                    display: flex;
+                }
+
+                .nav-links li {
+                    width: 100%;
+                }
+
+                    .nav-links li a {
+                        width: 100%;
+                        box-sizing: border-box;
+                    }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">Destinos<span>2026</span></a>
+
+            <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">
+                <span></span><span></span><span></span>
+            </button>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html" class="activo-nav">Inicio</a></li>
+                <li><a href="#lista-destinos">Destinos</a></li>
+                <li><a href="cabo-de-palos.html">Europa</a></li>
+                <li><a href="osaka.html">Asia</a></li>
+                <li><a href="salento.html">América</a></li>
+                <li><a href="contacto.html" class="btn-nav-cta">contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+    <header class="banner">
+        <div class="bannercontent-content">
+            <h1>Destinos poco comunes para visitar en 2026</h1>
+            <p>Explora lugares auténticos, sorprendentes y lejos del turismo masivo</p>
+        </div>
+    </header>
+
+    <div class="controls">
+        <button onclick="ordenarPorPrecio()" id="btn-ordenar">Ordenar por precio ↑</button>
+
+        <div class="filtros">
+            <button class="filtro activo" onclick="filtrar('todos')">Todos</button>
+            <button class="filtro" onclick="filtrar('barato')">Económico</button>
+            <button class="filtro" onclick="filtrar('medio')">Medio</button>
+            <button class="filtro" onclick="filtrar('caro')">Premium</button>
+        </div>
+    </div>
+
+    <main id="lista-destinos">
+
+        <a href="cabo-de-palos.html" class="link-destino" data-precio="450">
+            <article class="destino barato">
+                <img src="imagenes/cabodepalos.jpg" alt="Cabo de Palos">
+                <div class="contenido">
+                    <h2>Cabo de Palos, España</h2>
+                    <p>Un paraíso mediterráneo ideal para el buceo y la tranquilidad.</p>
+                    <span class="precio">450€</span>
+                </div>
+            </article>
+        </a>
+
+        <a href="canondelcolca.html" class="link-destino" data-precio="900">
+            <article class="destino medio">
+                <img src="imagenes/cañondelcolca.png" alt="Cañon del Colca">
+                <div class="contenido">
+                    <h2>Cañón del Colca, Perú</h2>
+                    <p>Impresionante paisaje andino donde reina el cóndor.</p>
+                    <span class="precio">900€</span>
+                </div>
+            </article>
+        </a>
+
+        <a href="chefchaouen.html" class="link-destino" data-precio="600">
+            <article class="destino barato">
+                <img src="imagenes/Chefchaouen.png" alt="Chefchaouen">
+                <div class="contenido">
+                    <h2>Chefchaouen, Marruecos</h2>
+                    <p>La icónica ciudad azul llena de historia y cultura.</p>
+                    <span class="precio">600€</span>
+                </div>
+            </article>
+        </a>
+
+        <a href="islasferoe.html" class="link-destino" data-precio="850">
+            <article class="destino medio">
+                <img src="imagenes/islasferoe.png" alt="Islas Faroe">
+                <div class="contenido">
+                    <h2>Islas Faroe, Dinamarca</h2>
+                    <p>Naturaleza salvaje y auroras boreales inolvidables.</p>
+                    <span class="precio">850€</span>
+                </div>
+            </article>
+        </a>
+
+        <a href="ksamil.html" class="link-destino" data-precio="500">
+            <article class="destino barato">
+                <img src="imagenes/kasmil.png" alt="Ksamil">
+                <div class="contenido">
+                    <h2>Ksamil, Albania</h2>
+                    <p>Playas cristalinas a precios asequibles.</p>
+                    <span class="precio">500€</span>
+                </div>
+            </article>
+        </a>
+
+        <a href="lagobled.html" class="link-destino" data-precio="780">
+            <article class="destino medio">
+                <img src="imagenes/lagobled.png" alt="Lago Bled">
+                <div class="contenido">
+
+                    <h2>Lago Bled, Eslovenia</h2>
+                    <p>Un escenario de cuento entre montañas.</p>
+                    <span class="precio">780€</span>
+                </div>
+            </article>
+        </a>
+
+        <a href="luang-prabang.html" class="link-destino" data-precio="1300">
+            <article class="destino caro">
+                <img src="imagenes/luang.png" alt="Luang Prabang">
+                <div class="contenido">
+                    <h2>Luang Prabang, Laos</h2>
+                    <p>Espiritualidad y naturaleza en perfecta armonía.</p>
+                    <span class="precio">1300€</span>
+                </div>
+            </article>
+        </a>
+
+        <a href="matera.html" class="link-destino" data-precio="820">
+            <article class="destino medio">
+                <img src="imagenes/matera.png" alt="Matera">
+                <div class="contenido">
+                    <h2>Matera, Italia</h2>
+                    <p>Historia viva excavada en la roca.</p>
+                    <span class="precio">820€</span>
+                </div>
+            </article>
+        </a>
+
+        <a href="osaka.html" class="link-destino" data-precio="1400">
+            <article class="destino caro">
+                <img src="imagenes/osaka.png" alt="Osaka">
+                <div class="contenido">
+                    <h2>Osaka, Japón</h2>
+                    <p>Modernidad, tradición y gastronomía.</p>
+                    <span class="precio">1400€</span>
+                </div>
+            </article>
+        </a>
+
+        <a href="salento.html" class="link-destino" data-precio="550">
+            <article class="destino barato">
+                <img src="imagenes/salento.png" alt="Salento">
+                <div class="contenido">
+                    <h2>Salento, Colombia</h2>
+                    <p>Café, naturaleza y color.</p>
+                    <span class="precio">550€</span>
+                </div>
+            </article>
+        </a>
+
+        <a href="svaneti.html" class="link-destino" data-precio="950">
+            <article class="destino medio">
+                <img src="imagenes/svaneti.png" alt="Svaneti">
+                <div class="contenido">
+                    <h2>Svaneti, Georgia</h2>
+                    <p>Torres medievales y montañas del Cáucaso.</p>
+                    <span class="precio">950€</span>
+                </div>
+            </article>
+        </a>
+
+        <a href="tiflis.html" class="link-destino" data-precio="880">
+            <article class="destino medio">
+                <img src="imagenes/tiflis.png" alt="Tiflis">
+                <div class="contenido">
+                    <h2>Tiflis, Georgia</h2>
+                    <p>Cultura, historia y termas tradicionales.</p>
+                    <span class="precio">880€</span>
+                </div>
+            </article>
+        </a>
+
+    </main>
+
+    <footer>
+        <p>© 2026 Destinos Alternativos · Viaja diferente</p>
+    </footer>
+    <h1> <a href="index.html" id="btn-arriba" aria-label="Volver arriba">&#8679;</a> </h1>
+
+    <style>
+        #btn-arriba {
+            display: block;
+            width: 56px;
+            height: 56px;
+            margin: 10px auto 36px;
+            opacity: 0.75;
+            transition: opacity 0.2s, transform 0.2s;
+            text-decoration: none;
+        }
+
+            #btn-arriba:hover {
+                opacity: 1;
+                transform: translateY(-5px);
+            }
+
+            #btn-arriba svg {
+                width: 100%;
+                height: 100%;
+            }
+    </style>
+
+    <script>
+        // ── Hamburger toggle (añadido) ──
+        const toggle = document.getElementById("nav-toggle");
+        const navLinksList = document.getElementById("nav-links");
+        toggle.addEventListener("click", () => {
+            toggle.classList.toggle("abierto");
+            navLinksList.classList.toggle("abierto");
+        });
+        navLinksList.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => {
+                toggle.classList.remove("abierto");
+                navLinksList.classList.remove("abierto");
+            });
+        });
+
+        // ── Código original sin modificar ──
+        let ordenAscendente = true;
+
+        function ordenarPorPrecio() {
+            const contenedor = document.getElementById("lista-destinos");
+            const destinos = Array.from(contenedor.children);
+
+            destinos.sort((a, b) => {
+                const precioA = parseInt(a.dataset.precio);
+                const precioB = parseInt(b.dataset.precio);
+                return ordenAscendente ? precioA - precioB : precioB - precioA;
+            });
+
+
+            const btn = document.getElementById("btn-ordenar");
+            btn.textContent = ordenAscendente ? "Ordenar por precio ↓" : "Ordenar por precio ↑";
+
+            ordenAscendente = !ordenAscendente;
+
+            destinos.forEach((destino, i) => {
+                destino.style.animationDelay = i * 0.07 + "s";
+                destino.classList.remove("aparece");
+                void destino.offsetWidth;
+                destino.classList.add("aparece");
+                contenedor.appendChild(destino);
+            });
+        }
+
+        function filtrar(tipo) {
+
+            document.querySelectorAll(".filtro").forEach(btn => btn.classList.remove("activo"));
+            event.target.classList.add("activo");
+
+            const contenedor = document.getElementById("lista-destinos");
+            const destinos = Array.from(contenedor.children);
+
+            destinos.forEach((destino, i) => {
+                const articulo = destino.querySelector("article");
+                if (tipo === "todos" || articulo.classList.contains(tipo)) {
+                    destino.style.display = "block";
+                    destino.style.animationDelay = i * 0.07 + "s";
+                    destino.classList.remove("aparece");
+                    void destino.offsetWidth;
+                    destino.classList.add("aparece");
+                } else {
+                    destino.style.display = "none";
+                }
+            });
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            const destinos = document.querySelectorAll(".link-destino");
+            destinos.forEach((destino, i) => {
+                destino.style.animationDelay = i * 0.07 + "s";
+                destino.classList.add("aparece");
+            });
+        });
+    </script>
+
+</body>
+</html>
